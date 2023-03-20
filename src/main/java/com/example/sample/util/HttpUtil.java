@@ -1,5 +1,6 @@
 package com.example.sample.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.Assert;
@@ -11,6 +12,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 
+@Slf4j
 public class HttpUtil {
 
     // 헤더
@@ -182,6 +184,9 @@ public class HttpUtil {
         result.put("status", response.getStatusCode());
         result.put("header", response.getHeaders());
         result.put("body", response.getBody());
+
+
+        log.info(response.getBody().toString());
 
         return result;
     }

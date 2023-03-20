@@ -27,6 +27,9 @@ dependencies {
 	implementation 'com.querydsl:querydsl-jpa:5.0.0'
 	implementation "com.querydsl:querydsl-apt:5.0.0"
 
+	implementation 'org.apache.httpcomponents:httpcore'
+	implementation 'org.apache.httpcomponents:httpclient'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2:1.4.200'
 	annotationProcessor 'org.projectlombok:lombok'
