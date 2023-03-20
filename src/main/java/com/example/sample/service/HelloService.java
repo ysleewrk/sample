@@ -17,7 +17,7 @@ public class HelloService {
 
     public List<SearchResultDto> searchWord(SearchParamDto reqDto) throws Exception {
 
-        PlatformEnum platform = PlatformEnum.valueOf(reqDto.getPlatform());
+        PlatformEnum platform = PlatformEnum.valueOf(reqDto.getPlatform().toUpperCase());
 
         PlatformService platformService;
         switch (platform) {

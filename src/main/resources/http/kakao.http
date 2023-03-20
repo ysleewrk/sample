@@ -1,0 +1,2 @@
+GET https://dapi.kakao.com/v2/search/blog?query=테스트 HTTP/1.1
+Authorization: KakaoAK f9c3bc515657b7b45cec4516bb761643
