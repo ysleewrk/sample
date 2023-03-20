@@ -1,0 +1,89 @@
+{
+  "documents": [
+    {
+      "blogname": "짧은머리 개발자",
+      "contents": "이전에 쓰던 To Do List를 폐기하고, NestJS MVC 환경에서 TDD를 수행하는 법을 작성하려 한다. 크게 Unit \\u003cb\\u003eTest\\u003c/b\\u003e와 Integration \\u003cb\\u003eTest\\u003c/b\\u003e로 나누어서 연재할 예정이다. 간략한 MVC 흔히 서비스의 프론트엔드에서 발생하는 요청을 처리하기 위해 우리는 백엔드의 시스템을 MVC 디자인 패턴을 이용해 설계하곤 한다. MVC 패턴을...",
+      "datetime": "2023-03-10T21:59:55.000+09:00",
+      "thumbnail": "https://search4.kakaocdn.net/argon/130x130_85_c/L9EJ0FzI9iO",
+      "title": "NestJS — \\u003cb\\u003eTest\\u003c/b\\u003e Driven Development (1)",
+      "url": "http://dev-whoan.xyz/102"
+    },
+    {
+      "blogname": "포시코딩",
+      "contents": "개요 오늘도 헛소리 하는 다른 블로그들이 답답해서 내가 해결방법 찾아 정리해본다. 기본 세팅 app.e2e-spec.ts import { \\u003cb\\u003eTest\\u003c/b\\u003e, TestingModule } from \\u0026#39;@nestjs/testing\\u0026#39;; import { INestApplication } from \\u0026#39;@nestjs/common\\u0026#39;; import * as request from \\u0026#39;supertest\\u0026#39;; import { AppModule } from \\u0026#39;./../src/app.module...",
+      "datetime": "2023-03-06T15:52:14.000+09:00",
+      "thumbnail": "https://search2.kakaocdn.net/argon/130x130_85_c/Hsdm9MvxP42",
+      "title": "[Nest.js] Jest e2e \\u003cb\\u003etest\\u003c/b\\u003e (app.e2e-spec.ts)",
+      "url": "http://4sii.tistory.com/455"
+    },
+    {
+      "blogname": "짧은머리 개발자",
+      "contents": "NestJS — \\u003cb\\u003eTest\\u003c/b\\u003e Driven Development (1) 이전에 쓰던 To Do List를 폐기하고, NestJS MVC 환경에서 TDD를 수행하는 법을 작성하려 한다. 크게 Unit \\u003cb\\u003eTest\\u003c/b\\u003e와 Integration \\u003cb\\u003eTest\\u003c/b\\u003e로 나누어서 연재할 예정이다. 흔히 서비스의 프론트엔드에서 발생하는 요청 dev-whoan.xyz 계속해서 User 정보를 관리하는 API 서버를 설계하고...",
+      "datetime": "2023-03-20T00:30:07.000+09:00",
+      "thumbnail": "https://search3.kakaocdn.net/argon/130x130_85_c/698rMXgQPqy",
+      "title": "NestJS — \\u003cb\\u003eTest\\u003c/b\\u003e Driven Development (2)",
+      "url": "http://dev-whoan.xyz/104"
+    },
+    {
+      "blogname": "기어가더라도 제대로",
+      "contents": "1. Unit \\u003cb\\u003eTest\\u003c/b\\u003e가 지켜야할 FIRST 2. Core Data Store란? 3. 실제 테스트 구성하기 3.1. \\u003cb\\u003eTest\\u003c/b\\u003e앱 초기 CoreData 세팅 3.2. 테스트 전용 Core Data Storage 구현 3.3. \\u003cb\\u003eTest\\u003c/b\\u003e 구현 4. 글 맺음 1. Unit \\u003cb\\u003eTest\\u003c/b\\u003e가 지켜야 할 FIRST F - Fast: 빨라야합니다. 테스트 실행부터 결과까지 빠르게 나와야 합니다. I - Isolated: 독립적이...",
+      "datetime": "2023-02-03T13:56:44.000+09:00",
+      "thumbnail": "https://search3.kakaocdn.net/argon/130x130_85_c/7pHrJ5v0iFK",
+      "title": "[iOS-CoreData] Unit \\u003cb\\u003eTest\\u003c/b\\u003e 해보기",
+      "url": "http://damagucci-juice.tistory.com/269"
+    },
+    {
+      "blogname": "(주)바이오앤드 \\u0026 기초 Table Top 장비 및 분석장비 이야기",
+      "contents": "acella 100, acella 50, acella 20 )을 사용하시면 됩니다. fluidlab R-300 으로 미세조류인 녹조류 측정도 가능합니다 !! (1) Cell Counter 측정테스트 \\u003cb\\u003eTest\\u003c/b\\u003e 를 위해서 어항의 녹조류를 추출하여 진행하였습니다. 어항의 인공 수초에서 생긴 녹조류를 추출하여 fluidlab R-300 으로 세포계수 측정이 가능한지 유무를...",
+      "datetime": "2023-03-17T11:34:43.000+09:00",
+      "thumbnail": "https://search3.kakaocdn.net/argon/130x130_85_c/85jloC17TR3",
+      "title": "[ fluidlab R-300 ] 녹조류 관련 \\u003cb\\u003eTest\\u003c/b\\u003e 실험 결과",
+      "url": "http://bioand.tistory.com/1442"
+    },
+    {
+      "blogname": "killog",
+      "contents": "분야가 넓고 깊고 방대해서 감동받고 후일 스터디를 계획하게됐다는 이야기로 시작을 해보려합니다.. 아니 이전에 그라파나부터 공부해야겠네요 Why we \\u003cb\\u003etest\\u003c/b\\u003e? Testing Applications on the Web 이라는 책을 제가 하고 싶은 말을 너무 잘 정리해놓아주셔서 인용해왔습니다. 웹 애플리케이션의 장점은 여러 사용자가 동시...",
+      "datetime": "2023-03-12T23:18:17.000+09:00",
+      "thumbnail": "https://search4.kakaocdn.net/argon/130x130_85_c/CalxivV0fjq",
+      "title": "테스트 초심자의 눈으로 바라보는 locust \\u003cb\\u003etest\\u003c/b\\u003e",
+      "url": "http://kils-log-of-develop.tistory.com/817"
+    },
+    {
+      "blogname": "C# Unity 공부",
+      "contents": "별로 \\u003cb\\u003etest\\u003c/b\\u003e가 가능한 툴을 만들자 #\\u003cb\\u003etest\\u003c/b\\u003e 타입 별 필드는 [Header]로 깔끔하게 나눈 후 [SerializeField]로 인스펙터 창에서 설정이 가능하게 만들기 [Header(\\u0026#34;Skill Type\\u0026#34;)] public Button type1Btn; public Button type2Btn; public Button type3Btn; public Button type4Btn; public Button type5Btn; public Button...",
+      "datetime": "2023-03-20T02:03:14.000+09:00",
+      "thumbnail": "https://search4.kakaocdn.net/argon/130x130_85_c/GG1Wl3gEvl1",
+      "title": "Bullet pattern(\\u003cb\\u003etest\\u003c/b\\u003e tool)",
+      "url": "http://dlghksrnr.tistory.com/220"
+    },
+    {
+      "blogname": "forest",
+      "contents": "채우고 취준 때도 사용하는 경우가 많은 것 같다. but 나는 일주일도 안 되는 시간 안에 창의품을 취득해야 했다..ㅎ 단기간에 취득할 수 있는 자격증이 e-\\u003cb\\u003eTest\\u003c/b\\u003e 뿐이어서 바로 시험 준비를 시작했다. ​ 나처럼 급하게 e-\\u003cb\\u003eTest\\u003c/b\\u003e에 응시하는 사람들(특히 맥북 유저!!!!)를 위한 후기글! ​ ​ ​ Summary 시험일자 : 2022년 12...",
+      "datetime": "2023-03-17T14:32:00.000+09:00",
+      "thumbnail": "",
+      "title": "e-\\u003cb\\u003eTest\\u003c/b\\u003e(이테스트) 자격증 시험 후기 feat.맥북",
+      "url": "https://blog.naver.com/keepforestgreen/223047399248"
+    },
+    {
+      "blogname": "감자주먹밥",
+      "contents": "\\u003cb\\u003eTest\\u003c/b\\u003e? 작성한 코드가 의도한대로 작동하는지 검증하는 과정 UI 표시 UI Layout 설정 API Request UserDefaults 저장/가져오기 등 테스트 종류 Unit \\u003cb\\u003eTest\\u003c/b\\u003e - 특정 함수, 메소드의 동작에 대한 테스트 (오늘 알아볼 것) UI \\u003cb\\u003eTest\\u003c/b\\u003e - UI 표시 / UI Action에 대한 테스트 \\u003cb\\u003eTest\\u003c/b\\u003e Coverage XCTest 프레임워크를 사용해서 테스트를...",
+      "datetime": "2023-01-28T14:17:47.000+09:00",
+      "thumbnail": "https://search3.kakaocdn.net/argon/130x130_85_c/1reG2JgHpvM",
+      "title": "XCTest 프로젝트 TestCode 작성\\u0026amp;검증 (Unit \\u003cb\\u003eTest\\u003c/b\\u003e)",
+      "url": "http://justhm.tistory.com/50"
+    },
+    {
+      "blogname": "All I Need Is Data.",
+      "contents": "원하는 그룹들 간에 생존분석을 수행할 수 있고, 수많은 변수들 중에서 실제로 이런 것을 찾기 위해서는 도메인 지식이 필요할 것으로 보인다. Log Rank \\u003cb\\u003eTest\\u003c/b\\u003e 로그 순위법은 두 군 차이에서 유의미한 차이가 있는가를 확인하기 위해 사용한다고 한다. 로그 순위법에서는 두 군을 합하여 전체 집단을 관찰 기간 순으로...",
+      "datetime": "2023-02-21T22:10:25.000+09:00",
+      "thumbnail": "https://search1.kakaocdn.net/argon/130x130_85_c/AuX3hXoryI1",
+      "title": "Python) 생존 분석 이해해보기 (KMF, LOG RANK \\u003cb\\u003eTEST\\u003c/b\\u003e, CoxPH, AFT)",
+      "url": "http://data-newbie.tistory.com/920"
+    }
+  ],
+  "meta": {
+    "is_end": false,
+    "pageable_count": 800,
+    "total_count": 1824358
+  }
+}

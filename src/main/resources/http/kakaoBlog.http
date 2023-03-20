@@ -1,0 +1,20 @@
+# curl -v -X GET "https://dapi.kakao.com/v2/search/blog" 
+#--data-urlencode "query=https://brunch.co.kr/@tourism 집짓기" 
+#-H "Authorization: KakaoAK ${REST_API_KEY}"
+GET https://dapi.kakao.com/v2/search/blog
+Authorization: KakaoAK ${REST_API_KEY}
+Content-Type: application/x-www-form-urlencoded
+
+query=https%3A%2F%2Fbrunch.co.kr%2F%40tourism+%EC%A7%91%EC%A7%93%EA%B8%B0
+
+###
+
+https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide#search-blog
+
+
+
+https://dapi.kakao.com/v2/search/blog?sort=accuracy&page=1&size=10&query=test
+authorization: "KakaoAK {REST_API_KEY}"
+
+
+
