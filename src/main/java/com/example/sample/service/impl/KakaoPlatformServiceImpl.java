@@ -5,8 +5,12 @@ import com.example.sample.dto.SearchParamDto;
 import com.example.sample.dto.SearchResultDto;
 import com.example.sample.service.PlatformService;
 import com.example.sample.util.HttpUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,12 +25,12 @@ import java.util.List;
 public class KakaoPlatformServiceImpl implements PlatformService {
 
     @Override
-    public List<SearchResultDto> searchByPlatform(SearchParamDto reqDto) {
+    public SearchResultDto searchByPlatform(SearchParamDto reqDto) {
 
         HashMap<String, Object> result;
 
         String apiUrl = "https://dapi.kakao.com/v2/search/blog";
-        String apiKey = "";
+        String apiKey = "f9c3bc515657b7b45cec4516bb761643";
 
 //        HashMap<String, Object> result = new HttpUtil()
 //                .url(apiUrl)
@@ -57,15 +61,25 @@ public class KakaoPlatformServiceImpl implements PlatformService {
 
 
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        //objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
+        SearchResultDto resultDto = new SearchResultDto();
         try {
             result = temp.build();
+            log.info(result.toString());
+            resultDto = objectMapper.readValue((String)result.get("body"), new TypeReference<SearchResultDto>() {
+            });
         } catch (HttpClientErrorException e) {
             KakaoErrorDto errorDto = objectMapper.convertValue(e.getResponseBodyAsString(), new TypeReference<>() {
             });
-            log.info(errorDto.toString());
+
+        } catch (JsonMappingException e) {
+            throw new RuntimeException(e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
 
-        return null;
+        return resultDto;
     }
 }

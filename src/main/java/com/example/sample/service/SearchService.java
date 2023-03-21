@@ -3,6 +3,7 @@ package com.example.sample.service;
 import com.example.sample.dto.SearchParamDto;
 import com.example.sample.dto.SearchResultDto;
 import com.example.sample.dto.enums.PlatformEnum;
+import com.example.sample.repository.SearchHistoryRepository;
 import com.example.sample.service.impl.KakaoPlatformServiceImpl;
 import com.example.sample.service.impl.NaverPlatformServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +13,16 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class HelloService {
+public class SearchService {
+
+    private final SearchHistoryRepository searchHistoryRepository;
+
+    public SearchService(SearchHistoryRepository searchHistoryRepository) {
+        this.searchHistoryRepository = searchHistoryRepository;
+    }
 
 
-    public List<SearchResultDto> searchWord(SearchParamDto reqDto) throws Exception {
+    public SearchResultDto searchWord(SearchParamDto reqDto) throws Exception {
 
         PlatformEnum platform = PlatformEnum.valueOf(reqDto.getPlatform().toUpperCase());
 
@@ -39,9 +46,15 @@ public class HelloService {
                 platformService = new KakaoPlatformServiceImpl();
         }
 
-        List<SearchResultDto> searchResultList = platformService.searchByPlatform(reqDto);
+        SearchResultDto searchResult = platformService.searchByPlatform(reqDto);
 
-        return searchResultList;
+        return searchResult;
+    }
+
+    private void insertSearchHistory(SearchParamDto reqDto) {
+
+        //searchHistoryRepository.save(reqDto);
+
     }
 
 

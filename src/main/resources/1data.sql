@@ -1,0 +1,6 @@
+INSERT INTO HELLO (id) VALUES
+(1),
+(2),
+(3);
+
+

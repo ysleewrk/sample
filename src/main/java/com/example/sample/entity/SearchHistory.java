@@ -2,12 +2,8 @@ package com.example.sample.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -18,15 +14,14 @@ public class SearchHistory extends BaseEntity {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(name = "search_date", nullable = false)
+    private String searchDate;
+
+    @Column(name = "query", nullable = false)
+    private String query;
+
+    @Column(name = "platform", nullable = false)
     private String platform;
-
-    @Column
-    private String keyword;
-
-    @Column
-    private String deviceId;
-
 
 }
 

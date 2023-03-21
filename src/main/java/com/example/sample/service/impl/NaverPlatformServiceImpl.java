@@ -24,7 +24,7 @@ import java.util.List;
 public class NaverPlatformServiceImpl implements PlatformService {
 
     @Override
-    public List<SearchResultDto> searchByPlatform(SearchParamDto reqDto) {
+    public SearchResultDto searchByPlatform(SearchParamDto reqDto) {
         HashMap<String, Object> result;
 
         String apiUrl = "https://openapi.naver.com/v1/search/blog.json";

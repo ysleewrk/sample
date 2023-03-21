@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PlatformService {
 
-    public List<SearchResultDto> searchByPlatform(SearchParamDto reqDto);
+    public SearchResultDto searchByPlatform(SearchParamDto reqDto);
 }

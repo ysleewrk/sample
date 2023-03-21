@@ -1,3 +1,5 @@
+
+
 server.port: 8088
 
 spring:
@@ -10,3 +12,7 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
