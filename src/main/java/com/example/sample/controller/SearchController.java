@@ -28,7 +28,8 @@ public class SearchController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<SearchResultDto> searchQuery(@Validated @ModelAttribute SearchParamDto reqDto, BindingResult bindingResult) throws Exception {
+    public ResponseEntity<SearchResultDto> searchQuery(@Validated @ModelAttribute SearchParamDto reqDto
+            , BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
             throw new CustomException(bindingResult.getFieldError().getDefaultMessage());

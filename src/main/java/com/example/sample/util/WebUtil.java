@@ -10,17 +10,22 @@ public class WebUtil {
     public static String encode(String text) {
         String result = "";
         try {
-            result = URLEncoder.encode(text, StandardCharsets.UTF_8.toString());
+            if (text != null && !text.isBlank()) {
+                result = URLEncoder.encode(text, StandardCharsets.UTF_8.toString());
+            }
         } catch (UnsupportedEncodingException e) {
             result = "";
         }
         return result;
     }
 
+
     public static String decode(String text) {
         String result = "";
         try {
-            result = URLDecoder.decode(text, StandardCharsets.UTF_8.toString());
+            if (text != null && !text.isBlank()) {
+                result = URLDecoder.decode(text, StandardCharsets.UTF_8.toString());
+            }
         } catch (UnsupportedEncodingException e) {
             result = "";
         }

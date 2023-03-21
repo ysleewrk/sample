@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        BindingResult bindingResult = ex.getBindingResult();
-        String fieldError = bindingResult.getFieldError().getField();
-        String errorMessage = bindingResult.getFieldError().getDefaultMessage();
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, errorMessage);
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(CustomException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, ex.getErrorMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
