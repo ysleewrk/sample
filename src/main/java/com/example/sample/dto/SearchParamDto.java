@@ -1,11 +1,12 @@
 package com.example.sample.dto;
 
 import com.example.sample.dto.enums.PlatformEnum;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
 @Getter
@@ -16,7 +17,7 @@ public class SearchParamDto {
     private String platform = PlatformEnum.KAKAO.getValue();
 
     @NotEmpty(message = "검색어는 필수로 입력해야합니다.")
-    private String keyword;
+    private String term;
 
     private String sort = "accuracy";
 

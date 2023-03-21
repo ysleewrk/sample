@@ -16,11 +16,18 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create
+  thymeleaf:
+    cache: false
+  devtools:
+    livereload:
+      enabled: true
 
 
-search.kakao.url: https://dapi.kakao.com/v2/search/blog
-search.kakao.key: f9c3bc515657b7b45cec4516bb761643
-
-search.naver.url: https://openapi.naver.com/v1/search/blog.json
-search.naver.id: Nph3XegwIY6kjvoo1mRC
-search.naver.key: ybkMKGoO52
+search:
+  kakao:
+    url: https://dapi.kakao.com/v2/search/blog
+    key: f9c3bc515657b7b45cec4516bb761643
+  naver:
+    url: https://openapi.naver.com/v1/search/blog.json
+    id: Nph3XegwIY6kjvoo1mRC
+    key: ybkMKGoO52

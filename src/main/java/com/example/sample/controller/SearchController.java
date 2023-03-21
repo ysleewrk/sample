@@ -2,6 +2,7 @@ package com.example.sample.controller;
 
 import com.example.sample.common.CustomException;
 import com.example.sample.dto.HelloDto;
+import com.example.sample.dto.KakaoSearchResultDto;
 import com.example.sample.dto.SearchParamDto;
 import com.example.sample.dto.SearchResultDto;
 import com.example.sample.service.SearchService;
@@ -28,7 +29,7 @@ public class SearchController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<SearchResultDto> searchQuery(@Validated @ModelAttribute SearchParamDto reqDto
+    public ResponseEntity<KakaoSearchResultDto> searchQuery(@Validated @ModelAttribute SearchParamDto reqDto
             , BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
@@ -38,7 +39,7 @@ public class SearchController {
 
 
 
-        SearchResultDto result = searchService.searchWord(reqDto);
+        KakaoSearchResultDto result = searchService.searchWord(reqDto);
 
 //        HelloDto helloDto = new HelloDto();
 //        Function<HelloDto, SearchFunction> executeIpay = dto -> null;

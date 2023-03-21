@@ -1,0 +1,244 @@
+/* Reset CSS */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body {
+    line-height: 1;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+header {
+    /*display: flex;*/
+    align-items: center;
+    justify-content: space-between;
+    height: 92px; /* Set the height of the header */
+    padding: 20px; /* Add padding to the header */
+    background-color: #f2f2f2; /* Set the background color of the header */
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1); /* Add a box-shadow to the header */
+}
+
+.logo-container img {
+    height: 46px; /* Set the height of the logo */
+}
+
+.search-container form {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    width: 500px; /* Set the width of the search input */
+    padding: 10px; /* Add padding to the search input */
+    border: none; /* Remove the border from the search input */
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1); /* Add a box-shadow to the search input */
+}
+
+.search-container button[type="submit"] {
+    background-color: #f2f2f2; /* Set the background color of the search buttons */
+    border: none; /* Remove the border from the search buttons */
+    padding: 10px; /* Add padding to the search buttons */
+    margin-left: 10px; /* Add margin to the left of the search buttons */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+}
+
+.search-container button[type="submit"]:hover {
+    background-color: #e6e6e6; /* Change the background color of the search buttons on hover */
+}
+
+nav {
+    padding-top: 20px;
+    background-color: #f2f2f2; /* Set the background color of the navigation bar */
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1); /* Add a box-shadow to the navigation bar */
+}
+
+nav h2 {
+    font-size: 24px;
+    margin: 0;
+    padding: 10px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-start;
+    list-style-type: none;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav li a {
+    text-decoration: none; /* Remove the underline from the navigation links */
+    color: #666; /* Set the color of the navigation links */
+    padding: 10px; /* Add padding to the navigation links */
+    display: block;
+}
+
+nav li a:hover {
+    background-color: #e6e6e6; /* Change the background color of the navigation links on hover */
+}
+
+nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+}
+
+nav ul li:hover > ul {
+    display: inherit;
+}
+
+nav ul ul li {
+    position: relative;
+    margin-top: 0px;
+    background-color: #f2f2f2;
+    box-shadow: none;
+}
+
+nav ul ul ul li {
+    position: relative;
+    top: -60px;
+    left: 170px;
+}
+
+nav li:hover {
+    background-color: #e6e6e6; /* Change the background color of the parent navigation link on hover */
+}
+
+nav li a p {
+    text-align: center;
+    color: #454545;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.content {
+    margin: 20px;
+}
+
+.content h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+
+.radio-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.radio-container label {
+    margin-right: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.radio-container input[type="radio"] {
+    margin-right: 5px;
+}
+
+.search-container form {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    width: 500px;
+    padding: 10px;
+    border: none;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-container button[type="submit"] {
+    background-color: #f2f2f2;
+    border: none;
+    padding: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.search-results {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-results h3 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.result-item {
+    margin-bottom: 20px;
+}
+
+.result-item a {
+    display: flex;
+    align-items: center;
+    color: #666;
+    text-decoration: none;
+}
+
+.result-item img {
+    width: 150px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.result-item h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.result-item p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #70757a;
+}
+
+.result-item .datetime {
+    font-size: 12px;
+    color: #70757a;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 5px 10px;
+    color: #555;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 0 5px;
+}
+
+.pagination a.active {
+    background-color: #ccc;
+    color: #fff;
+    border-color: #ccc;
+}
+

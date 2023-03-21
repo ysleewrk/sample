@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search main</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<!-- Header -->
+<header>
+    <div class="logo-container">
+        <a href="#">
+            <img th:src="@{/images/logo.png}" alt="logo">
+        </a>
+    </div>
+    <form action="" method="get" onsubmit="return false;">
+        <div class="radio-container">
+            <label><input type="radio" name="sort" value="accurancy" checked>accurancy</label>
+            <label><input type="radio" name="sort" value="recency">recency</label>
+        </div>
+        <div class="search-container">
+            <input id="search-input" name="keyword" type="text"  placeholder="Search keyword">
+            <input type="text" style="display: none;" />
+            <button id="search-button" type="button">Search</button>
+        </div>
+    </form>
+</header>
+
+<!-- Navigation bar -->
+<nav>
+    <h2>Top Searched</h2>
+    <ul>
+        <li><a href="javascript:;">Gmail<br/><p>(1000)</p></a></li>
+        <li><a href="javascript:;">Gmail<br/><p>(1000)</p></a></li>
+        <li><a href="javascript:;">Images<br/><p>(1000)</p></a></li>
+        <li><a href="javascript:;">가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/><p>(1000)</p></a></li>
+        <li><a href="javascript:;">More<br/><p>(1000)</p></a></li>
+        <li><a href="javascript:;">Sign in<br/><p>(1000)</p></a></li>
+        <li><a href="javascript:;">가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/><p>(1000)</p></a></li>
+        <li><a href="javascript:;">Sign in<br/><p>(1000)</p></a></li>
+        <li><a href="javascript:;">More<br/><p>(1000)</p></a></li>
+        <li><a href="javascript:;">가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/><p>(1000)</p></a></li>
+    </ul>
+</nav>
+
+<!-- Content -->
+<div class="content">
+    <h3>Search Results</h3>
+    <div class="search-results">
+        <!--
+        <div class="result-item">
+            <a href="#">
+                <img src="https://via.placeholder.com/150" alt="Thumbnail">
+                <h4>Result Title</h4>
+            </a>
+            <p>Result content goes here...</p>
+            <p class="datetime">Result date and time</p>
+        </div>
+        -->
+    </div>
+
+    <div class="pagination">
+        <!--
+        <a href="#" class="prev">&laquo; Previous</a>
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#" class="next">Next &raquo;</a>
+        -->
+    </div>
+
+</div>
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    const searchInput = document.querySelector('#search-input');
+    const searchButton = document.querySelector('#search-button');
+
+    const searchResults = document.querySelector('.search-results');
+    const pagination = document.querySelector('.pagination');
+    let currentPage = 1;
+
+
+
+    function doSearch() {
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm === '') {
+            return false;
+        }
+
+        console.log('Searching for: ' + searchTerm);
+
+        // Clear
+        searchResults.innerHTML = '';
+        pagination.innerHTML = '';
+
+        let sort = document.querySelector('input[name="sort"]:checked').value;
+
+        const xhr = new XMLHttpRequest();
+        const url = `/search?term=${searchTerm}&sort=${sort}&page=${currentPage}&size=10`;
+        xhr.open('GET', url, true);
+        xhr.onload = function() {
+            if (this.status === 200) {
+                const results = JSON.parse(this.responseText);
+                displayResults(results);
+                displayPagination(results.meta.pageable_count);
+            }
+        }
+        xhr.send();
+    }
+
+    function displayResults(results) {
+        results.documents.forEach(item => {
+            const result = document.createElement('div');
+            result.classList.add('result');
+            result.innerHTML = `
+            <a href="${item.url}" class="thumbnail">
+              <img src="${item.thumbnail}" alt="${item.blogname}">
+            </a>
+            <div class="details">
+              <h3 class="title"><a href="${item.url}">${item.title}</a></h3>
+              <p class="content">${item.contents}</p>
+              <p class="datetime">${item.datetime}</p>
+            </div>
+          `;
+            searchResults.appendChild(result);
+        });
+    }
+
+    function displayPagination(totalPages) {
+        pagination.innerHTML = '';
+        const maxLinks = 10;
+        let startPage = Math.max(1, currentPage - Math.floor(maxLinks / 2));
+        let endPage = Math.min(totalPages, startPage + maxLinks - 1);
+        startPage = Math.max(1, endPage - maxLinks + 1);
+        if (endPage > 50) endPage = 50;
+
+        for (let i = startPage; i <= endPage; i++) {
+            const link = document.createElement('a');
+            link.href = '#';
+            link.textContent = i;
+            if (i === currentPage) {
+                link.classList.add('active');
+            }
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                currentPage = i;
+                doSearch();
+            });
+            pagination.appendChild(link);
+        }
+    }
+
+
+
+
+    searchInput.addEventListener('keypress', (event) => {
+        if (event.keyCode === 13) {
+            currentPage = 1;
+            doSearch();
+        }
+    });
+    searchButton.addEventListener('click', (event) => {
+        currentPage = 1;
+        doSearch();
+    });
+    
+
+    /*]]>*/
+</script>
+
+</body>
+</html>

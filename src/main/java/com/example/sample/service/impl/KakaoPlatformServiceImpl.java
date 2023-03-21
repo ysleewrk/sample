@@ -23,14 +23,14 @@ import java.util.List;
 @Service
 public class KakaoPlatformServiceImpl implements PlatformService {
 
-    @Value("search.kakao.url")
-    private String apiUrl;
+    @Value("${search.kakao.url}")
+    private String apiUrl = "https://dapi.kakao.com/v2/search/blog";
 
-    @Value("search.kakao.key")
-    private String apiKey;
+    @Value("${search.kakao.key}")
+    private String apiKey = "f9c3bc515657b7b45cec4516bb761643";
 
     @Override
-    public SearchResultDto searchByPlatform(SearchParamDto reqDto) {
+    public KakaoSearchResultDto searchByPlatform(SearchParamDto reqDto) {
 
         List<String> allowedSortValues = List.of("accurancy", "recency");
         if (!allowedSortValues.contains(reqDto.getSort())) {
@@ -54,7 +54,7 @@ public class KakaoPlatformServiceImpl implements PlatformService {
                 .method("get")
                 .header("Authorization", "KakaoAK " + apiKey)
                 .contentType("application", "x-www-form-urlencoded", "UTF-8")
-                .queryString("query", reqDto.getKeyword())
+                .queryString("query", reqDto.getTerm())
                 .queryString("sort", reqDto.getSort())
                 .queryString("size", String.valueOf(reqDto.getSize()))
                 .queryString("page", String.valueOf(reqDto.getPage()));
@@ -66,12 +66,15 @@ public class KakaoPlatformServiceImpl implements PlatformService {
 
 
         SearchResultDto resultDto = new SearchResultDto();
+        KakaoSearchResultDto kakaoResultDto = new KakaoSearchResultDto();
         try {
             result = temp.build();
             log.info(result.toString());
-            KakaoSearchResultDto kakaoResultDto = objectMapper.readValue((String)result.get("body"), new TypeReference<KakaoSearchResultDto>() { });
+             kakaoResultDto = objectMapper.readValue((String)result.get("body"), new TypeReference<KakaoSearchResultDto>() { });
+//
+//            kakaoResultDto.getDocuments().stream().map
 
-            kakaoResultDto.getDocuments().stream().map
+
 
 
 
@@ -86,6 +89,6 @@ public class KakaoPlatformServiceImpl implements PlatformService {
             throw new RuntimeException(e);
         }
 
-        return resultDto;
+        return kakaoResultDto;
     }
 }

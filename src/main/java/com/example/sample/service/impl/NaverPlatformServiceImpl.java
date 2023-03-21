@@ -1,6 +1,7 @@
 package com.example.sample.service.impl;
 
 import com.example.sample.dto.KakaoErrorDto;
+import com.example.sample.dto.KakaoSearchResultDto;
 import com.example.sample.dto.SearchParamDto;
 import com.example.sample.dto.SearchResultDto;
 import com.example.sample.service.PlatformService;
@@ -20,17 +21,17 @@ import java.util.List;
 @Service
 public class NaverPlatformServiceImpl implements PlatformService {
 
-    @Value("search.naver.url")
+    @Value("${search.naver.url}")
     private String apiUrl;
 
-    @Value("search.naver.id")
+    @Value("${search.naver.id}")
     private String clientId;
 
-    @Value("search.naver.key")
+    @Value("${search.naver.key}")
     private String clientSecret;
 
     @Override
-    public SearchResultDto searchByPlatform(SearchParamDto reqDto) {
+    public KakaoSearchResultDto searchByPlatform(SearchParamDto reqDto) {
 
         List<String> allowedSortValues = List.of("sim", "date");
         if (!allowedSortValues.contains(reqDto.getSort())) {
@@ -55,7 +56,7 @@ public class NaverPlatformServiceImpl implements PlatformService {
                 .header("X-Naver-Client-Id", clientId)
                 .header("X-Naver-Client-Secret", clientSecret)
                 .contentType("application", "json", "UTF-8")
-                .queryString("query", WebUtil.encode(reqDto.getKeyword()))
+                .queryString("query", WebUtil.encode(reqDto.getTerm()))
 
             .queryString("sort", reqDto.getSort())
 

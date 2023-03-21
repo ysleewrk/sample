@@ -1,5 +1,6 @@
 package com.example.sample.service;
 
+import com.example.sample.dto.KakaoSearchResultDto;
 import com.example.sample.dto.SearchParamDto;
 import com.example.sample.dto.SearchResultDto;
 import com.example.sample.dto.enums.PlatformEnum;
@@ -22,15 +23,15 @@ public class SearchService {
     }
 
 
-    public SearchResultDto searchWord(SearchParamDto reqDto) throws Exception {
+    public KakaoSearchResultDto searchWord(SearchParamDto reqDto) throws Exception {
 
         PlatformEnum platform = PlatformEnum.valueOf(reqDto.getPlatform().toUpperCase());
 
-        PlatformService platformService;
+        PlatformService platformService = null;
         switch (platform) {
             case NAVER:
                 // 네이버 연동
-                platformService = new NaverPlatformServiceImpl();
+                //platformService = new NaverPlatformServiceImpl();
                 break;
             case GOOGLE:
                 // 구글 연동
@@ -46,7 +47,7 @@ public class SearchService {
                 platformService = new KakaoPlatformServiceImpl();
         }
 
-        SearchResultDto searchResult = platformService.searchByPlatform(reqDto);
+        KakaoSearchResultDto searchResult = platformService.searchByPlatform(reqDto);
 
         return searchResult;
     }
