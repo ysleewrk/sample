@@ -30,16 +30,9 @@
 <nav>
     <h2>Top Searched</h2>
     <ul>
-        <li><a href="javascript:;">Gmail<br/><p>(1000)</p></a></li>
-        <li><a href="javascript:;">Gmail<br/><p>(1000)</p></a></li>
-        <li><a href="javascript:;">Images<br/><p>(1000)</p></a></li>
-        <li><a href="javascript:;">가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/><p>(1000)</p></a></li>
-        <li><a href="javascript:;">More<br/><p>(1000)</p></a></li>
-        <li><a href="javascript:;">Sign in<br/><p>(1000)</p></a></li>
-        <li><a href="javascript:;">가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/><p>(1000)</p></a></li>
-        <li><a href="javascript:;">Sign in<br/><p>(1000)</p></a></li>
-        <li><a href="javascript:;">More<br/><p>(1000)</p></a></li>
-        <li><a href="javascript:;">가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/><p>(1000)</p></a></li>
+        <li th:each="entry : ${popularMap.entrySet()}">
+            <a th:href="|@{/search/main?term=}${entry.key}|" target="_blank">[[${entry.key}]]<br/><p>([[${entry.value}]])</p></a>
+        </li>
     </ul>
 </nav>
 
@@ -77,6 +70,9 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
 
+    const keywordParam = [[${keyword}]];
+
+
     const searchInput = document.querySelector('#search-input');
     const searchButton = document.querySelector('#search-button');
 
@@ -84,15 +80,21 @@
     const pagination = document.querySelector('.pagination');
     let currentPage = 1;
 
+    if (keywordParam) {
+        doSearch(keywordParam);
+    }
 
+    function doSearch(keyword) {
+        let searchTerm = searchInput.value.trim();
+        if (keyword) {
+            searchTerm = keyword;
+        } else {
+            searchInput.value.trim();
+        }
 
-    function doSearch() {
-        const searchTerm = searchInput.value.trim();
         if (searchTerm === '') {
             return false;
         }
-
-        console.log('Searching for: ' + searchTerm);
 
         // Clear
         searchResults.innerHTML = '';
@@ -108,6 +110,11 @@
                 const results = JSON.parse(this.responseText);
                 displayResults(results);
                 displayPagination(results.meta.pageable_count);
+            } else if (this.status === 400) {
+                const results = JSON.parse(this.responseText);
+                alert(results.responseMessage);
+            } else {
+                alert("처리중 오류가 발생하였습니다.")
             }
         }
         xhr.send();

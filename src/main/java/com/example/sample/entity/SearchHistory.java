@@ -20,9 +20,6 @@ public class SearchHistory extends BaseEntity {
     @Column(name = "query", nullable = false)
     private String query;
 
-    @Column(name = "platform", nullable = false)
-    private String platform;
-
 }
 
 

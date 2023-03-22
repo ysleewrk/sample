@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Data
-public class KakaoSearchResultDto {
+public class KakaoSearchResultDto extends SearchResultDto {
 
     @JsonProperty("documents")
     private List<Document> documents;

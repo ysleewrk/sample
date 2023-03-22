@@ -1,21 +1,19 @@
 package com.example.sample.controller;
 
-import com.example.sample.common.CustomException;
+import com.example.sample.common.exception.CustomException;
+import com.example.sample.common.service.ConcurrentService;
 import com.example.sample.dto.HelloDto;
-import com.example.sample.dto.KakaoSearchResultDto;
 import com.example.sample.dto.SearchParamDto;
 import com.example.sample.dto.SearchResultDto;
 import com.example.sample.service.SearchService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.directory.SearchResult;
-import javax.validation.Valid;
+import java.util.LinkedHashMap;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 @Slf4j
@@ -23,13 +21,15 @@ import java.util.function.Function;
 public class SearchController {
 
     private final SearchService searchService;
+    private final ConcurrentService concurrentService;
 
-    public SearchController(SearchService searchService) {
+    public SearchController(SearchService searchService, ConcurrentService concurrentService) {
         this.searchService = searchService;
+        this.concurrentService = concurrentService;
     }
 
     @GetMapping("/search")
-    public ResponseEntity<KakaoSearchResultDto> searchQuery(@Validated @ModelAttribute SearchParamDto reqDto
+    public ResponseEntity<SearchResultDto> searchQuery(@Validated @ModelAttribute SearchParamDto reqDto
             , BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
@@ -37,21 +37,46 @@ public class SearchController {
         }
 
 
+        concurrentService.increment(reqDto.getTerm());
+
+        SearchResultDto result = new SearchResultDto();
+
+        try {
+            result = searchService.searchWord(reqDto);
 
 
-        KakaoSearchResultDto result = searchService.searchWord(reqDto);
 
-//        HelloDto helloDto = new HelloDto();
-//        Function<HelloDto, SearchFunction> executeIpay = dto -> null;
+
+
+//        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
 //
 //
-//        CompletableFuture
-//                .supplyAsync(executeIpay.apply(helloDto))
-//                .thenApply(restAPICallback(helloDto))
-//                .exceptionally(exceptionHandler(helloDto))
-//                .join();
+//            return "Thread: " + Thread.currentThread().getName();
+//        }).thenApply(s -> {
+//            System.out.println("thenApply = ");
+//            return s.toUpperCase();
+//        });
+//        future.join();
+
+
+        } catch (CustomException e) {
+            result.setResponseCode("9999");
+            result.setResponseMessage(e.getErrorMessage());
+            return ResponseEntity.badRequest().body(result);
+
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
 
         return ResponseEntity.ok().body(result);
+    }
+
+
+
+    @GetMapping("/popular")
+    public ResponseEntity<LinkedHashMap<String, Long>> getPopular() {
+
+       return ResponseEntity.ok().body(concurrentService.getPopularList());
     }
 
     private Function<Object, HelloDto> restAPICallback(HelloDto vo) {

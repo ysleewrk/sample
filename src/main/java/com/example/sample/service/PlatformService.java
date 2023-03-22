@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PlatformService {
 
-    public KakaoSearchResultDto searchByPlatform(SearchParamDto reqDto);
+    public SearchResultDto searchByPlatform(SearchParamDto reqDto);
 }

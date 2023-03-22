@@ -1,29 +1,29 @@
 package com.example.sample.service;
 
+import com.example.sample.common.service.PropertiesService;
 import com.example.sample.dto.KakaoSearchResultDto;
 import com.example.sample.dto.SearchParamDto;
 import com.example.sample.dto.SearchResultDto;
 import com.example.sample.dto.enums.PlatformEnum;
 import com.example.sample.repository.SearchHistoryRepository;
 import com.example.sample.service.impl.KakaoPlatformServiceImpl;
-import com.example.sample.service.impl.NaverPlatformServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service
 public class SearchService {
 
     private final SearchHistoryRepository searchHistoryRepository;
+    private final PropertiesService propertiesService;
 
-    public SearchService(SearchHistoryRepository searchHistoryRepository) {
+    public SearchService(SearchHistoryRepository searchHistoryRepository, PropertiesService propertiesService) {
         this.searchHistoryRepository = searchHistoryRepository;
+        this.propertiesService = propertiesService;
     }
 
 
-    public KakaoSearchResultDto searchWord(SearchParamDto reqDto) throws Exception {
+    public SearchResultDto searchWord(SearchParamDto reqDto) throws Exception {
 
         PlatformEnum platform = PlatformEnum.valueOf(reqDto.getPlatform().toUpperCase());
 
@@ -44,10 +44,10 @@ public class SearchService {
             case KAKAO:
                 // 카카오연동
             default:
-                platformService = new KakaoPlatformServiceImpl();
+                platformService = new KakaoPlatformServiceImpl(propertiesService);
         }
 
-        KakaoSearchResultDto searchResult = platformService.searchByPlatform(reqDto);
+        SearchResultDto searchResult = platformService.searchByPlatform(reqDto);
 
         return searchResult;
     }

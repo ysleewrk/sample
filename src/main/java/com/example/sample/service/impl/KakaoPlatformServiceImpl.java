@@ -1,5 +1,6 @@
 package com.example.sample.service.impl;
 
+import com.example.sample.common.service.PropertiesService;
 import com.example.sample.dto.KakaoErrorDto;
 import com.example.sample.dto.KakaoSearchResultDto;
 import com.example.sample.dto.SearchParamDto;
@@ -23,14 +24,16 @@ import java.util.List;
 @Service
 public class KakaoPlatformServiceImpl implements PlatformService {
 
-    @Value("${search.kakao.url}")
-    private String apiUrl = "https://dapi.kakao.com/v2/search/blog";
+    private final String apiUrl;
+    private final String apiKey;
 
-    @Value("${search.kakao.key}")
-    private String apiKey = "f9c3bc515657b7b45cec4516bb761643";
+    public KakaoPlatformServiceImpl(PropertiesService propertiesService) {
+        this.apiUrl = propertiesService.getProperty("search.kakao.url");
+        this.apiKey = propertiesService.getProperty("search.kakao.key");
+    }
 
     @Override
-    public KakaoSearchResultDto searchByPlatform(SearchParamDto reqDto) {
+    public SearchResultDto searchByPlatform(SearchParamDto reqDto) {
 
         List<String> allowedSortValues = List.of("accurancy", "recency");
         if (!allowedSortValues.contains(reqDto.getSort())) {
@@ -65,8 +68,7 @@ public class KakaoPlatformServiceImpl implements PlatformService {
         objectMapper.registerModule(new JavaTimeModule());
 
 
-        SearchResultDto resultDto = new SearchResultDto();
-        KakaoSearchResultDto kakaoResultDto = new KakaoSearchResultDto();
+        SearchResultDto kakaoResultDto = new KakaoSearchResultDto();
         try {
             result = temp.build();
             log.info(result.toString());
