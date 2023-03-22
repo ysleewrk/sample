@@ -2,7 +2,6 @@ package com.example.sample.controller;
 
 import com.example.sample.common.exception.CustomException;
 import com.example.sample.common.service.ConcurrentService;
-import com.example.sample.dto.HelloDto;
 import com.example.sample.dto.SearchParamDto;
 import com.example.sample.dto.SearchResultDto;
 import com.example.sample.service.SearchService;
@@ -13,8 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 
 @Slf4j
 @RestController
@@ -36,28 +33,12 @@ public class SearchController {
             throw new CustomException(bindingResult.getFieldError().getDefaultMessage());
         }
 
-
+        // 인기검색어 1 추가
         concurrentService.increment(reqDto.getTerm());
 
         SearchResultDto result = new SearchResultDto();
-
         try {
             result = searchService.searchWord(reqDto);
-
-
-
-
-
-//        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
-//
-//
-//            return "Thread: " + Thread.currentThread().getName();
-//        }).thenApply(s -> {
-//            System.out.println("thenApply = ");
-//            return s.toUpperCase();
-//        });
-//        future.join();
-
 
         } catch (CustomException e) {
             result.setResponseCode("9999");
@@ -79,20 +60,4 @@ public class SearchController {
        return ResponseEntity.ok().body(concurrentService.getPopularList());
     }
 
-    private Function<Object, HelloDto> restAPICallback(HelloDto vo) {
-        return o -> {
-            log.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-
-            return vo;
-        };
-    }
-
-
-    private Function<Throwable,HelloDto> exceptionHandler(HelloDto vo) {
-        return o -> {
-            //통신중 에러가 날 경우 에러 정보를 결과로 저장
-
-            return vo;
-        };
-    }
 }

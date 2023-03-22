@@ -9,11 +9,9 @@ import org.springframework.stereotype.Component;
 public class PropertiesService {
 
     private Environment environment;
-
     public PropertiesService(Environment environment) {
         this.environment = environment;
     }
-
     public String getProperty(String key) {
     	return environment.getProperty(key);
     }

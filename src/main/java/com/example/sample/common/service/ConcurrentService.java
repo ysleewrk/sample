@@ -1,6 +1,7 @@
 package com.example.sample.common.service;
 
-import com.example.sample.dto.PopularResultDto;
+import com.example.sample.dto.SearchHistoryDto;
+import com.example.sample.repository.SearchRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -13,14 +14,27 @@ import java.util.stream.Collectors;
 @Component
 public class ConcurrentService {
 
+    private final SearchRepository searchRepository;
+
     private ConcurrentHashMap<String, LongAdder> concurrentHashMap;
 
-    @PostConstruct
-    public void initConcurrentMap() {
+    public ConcurrentService(SearchRepository searchRepository) {
+        this.searchRepository = searchRepository;
         concurrentHashMap = new ConcurrentHashMap<>();
     }
 
-    private final LongAdder counter = new LongAdder();
+    @PostConstruct
+    public void initConcurrentMap() {
+        // 서버 재기동시 인기검색어 유지를 위하여, 인기검색어 10건을 초기 적재.
+        List<SearchHistoryDto> popularList = searchRepository.getInitPopularList();
+        for (SearchHistoryDto row : popularList) {
+            String query = row.getQuery();
+            Long count = row.getSearchCount();
+            LongAdder longAdder = new LongAdder();
+            longAdder.add(count);
+            concurrentHashMap.put(query, longAdder);
+        }
+    }
 
     public void increment(@NotNull String query) {
         if (concurrentHashMap.containsKey(query)) {
@@ -49,23 +63,6 @@ public class ConcurrentService {
         return convertToLongMap(splitMap);
     }
 
-
-    public long getLongValue(@NotNull String query) {
-        if (!concurrentHashMap.containsKey(query)) {
-            return 0L;
-        }
-        return concurrentHashMap.get(query).longValue();
-    }
-
-    public int getIntValue(@NotNull String query) {
-        if (!concurrentHashMap.containsKey(query)) {
-            return 0;
-        }
-        return concurrentHashMap.get(query).intValue();
-    }
-
-
-
     private LinkedHashMap<String, LongAdder> sortByValue(ConcurrentHashMap<String, LongAdder> map) {
         List<Map.Entry<String, LongAdder>> sortedEntries = new ArrayList<>(map.entrySet());
         sortedEntries.sort(Comparator.comparingLong(e -> e.getValue().longValue()));
@@ -93,8 +90,6 @@ public class ConcurrentService {
 
         return longMap;
     }
-
-
 
 
 }
